@@ -1,0 +1,12 @@
+version: "3"
+services:
+ mysql-master:
+  restart: always
+  image: docker.io/mysql:latest
+  ports:
+   - 3306:3306
+  environment:
+   - MYSQL_ROOT_PASSWORD=123456
+  container_name: compose_mysql
+  volumes:
+   - /root/myDocker/dockercompose/mysql/data:/var/lib/mysql:z

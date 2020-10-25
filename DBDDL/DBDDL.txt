@@ -1,0 +1,28 @@
+﻿CREATE DATABASE `anueTest_schema` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+
+CREATE TABLE `Stock` (
+  `stockId` int unsigned NOT NULL AUTO_INCREMENT,
+  `stockName` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `stockNo` int unsigned NOT NULL,
+  `updateTime` datetime NOT NULL,
+  `createTime` datetime NOT NULL,
+  PRIMARY KEY (`stockId`,`stockNo`),
+  KEY `searchIndex` (`stockName`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+  
+CREATE TABLE `StockPrice` (
+  `priceId` int unsigned NOT NULL AUTO_INCREMENT,
+  `fk_stockId` int unsigned NOT NULL,
+  `transDate` date NOT NULL,
+  `transTime` time NOT NULL,
+  `transPrice` int NOT NULL,
+  `transQuantity` int NOT NULL,
+  `updateTime` datetime NOT NULL,
+  `createTime` datetime NOT NULL,
+  PRIMARY KEY (`priceId`,`fk_stockId`),
+  KEY `FK_stockId_idx` (`fk_stockId`) /*!80000 INVISIBLE */,
+  KEY `searchIndex` (`transDate`,`transTime`),
+  CONSTRAINT `FK_stockId` FOREIGN KEY (`fk_stockId`) REFERENCES `Stock` (`stockId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

@@ -1,0 +1,2 @@
+--Redis
+  docker run --restart=always -v /root/myDocker/redis/redis.conf:/etc/redis/redis.conf:z --name myredis -p 6379:6379 -d redis redis-server /etc/redis/redis.conf
